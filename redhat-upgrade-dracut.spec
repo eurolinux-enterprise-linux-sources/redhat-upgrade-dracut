@@ -2,13 +2,13 @@
 %global plymouthver 0.8.6
 
 Name:       redhat-upgrade-dracut
-Version:    0.8.0
+Version:    0.8.10
 Release:    1%{?dist}
 Summary:    The Red Hat Enterprise Linux Upgrade tool initramfs environment
 
 License:    GPLv2+
 URL:        https://github.com/dashea/redhat-upgrade-dracut
-Source0:    https://github.com/downloads/dashea/redhat-upgrade-dracut/%{name}-%{version}.tar.xz
+Source0:    %{name}-%{version}.tar.xz
 
 Summary:        initramfs environment for system upgrades
 BuildRequires:  rpm-devel >= 4.10.0
@@ -58,6 +58,56 @@ make install DESTDIR=$RPM_BUILD_ROOT \
 
 
 %changelog
+* Mon Mar 28 2016 David Shea <dshea@redhat.com> - 0.8.10-1
+- Use --clean-upgraded instead of --clean
+  Related: rhbz#1275622
+
+* Mon Oct  6 2014 David Shea <dshea@redhat.com> - 0.8.9-1
+- backup old product id certificates before installation of new ones (jdornak)
+  Resolves: rhbz#1148783
+
+* Wed Sep 24 2014 David Shea <dshea@redhat.com) - 0.8.8-1
+- Remove the installonly checks for kernel packages
+  Resolves: rhbz#1084154
+
+* Thu Sep  4 2014 David Shea <dshea@redhat.com> - 0.8.7-1
+- Run cleanup after the postupgrade scripts
+  Resolves: rhbz#1100391
+
+* Thu Mar 27 2014 David Shea <dshea@redhat.com> - 0.8.6-1
+- Change to the postupgrade script directory before running.
+  Resolves: rhbz#1078248
+
+* Tue Feb  4 2014 David Shea <dshea@redhat.com> - 0.8.5-1
+- Add the preupgrade-postupgrade script to the Makefile
+  Resolves: rhbz#1060843
+
+* Fri Jan 31 2014 David Shea <dshea@redhat.com> - 0.8.4-1
+- Sort the postupgrade scripts
+  Resolves: rhbz#1054262
+
+* Thu Jan 30 2014 David Shea <dshea@redhat.com> - 0.8.3-2
+- Restored changelog entries
+  Related: rhbz#1054262
+
+* Thu Jan 30 2014 David Shea <dshea@redhat.com> - 0.8.3-1
+- Add support for the postupgrade scripts created by preupgr
+  Resolves: rhbz#bz1054262
+
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.8.2-2
+- Mass rebuild 2014-01-24
+
+* Thu Jan 23 2014 David Shea <dshea@redhat.com> - 0.8.2-1
+- Remove the URL from the Source0 line.
+  Resolves: rhbz#1056731
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.8.1-2
+- Mass rebuild 2013-12-27
+
+* Tue Dec 10 2013 David Shea <dshea@redhat.com> - 0.8.1-1
+- Remove beefy miracle from the log
+  Resolves: rhbz#1031956
+
 * Fri Nov  8 2013 David Shea <dshea@redhat.com> - 0.8.0-1
 - Rename to redhat-upgrade-dracut
   Resolves: rhbz#1027492
