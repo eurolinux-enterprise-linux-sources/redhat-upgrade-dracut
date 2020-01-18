@@ -1,0 +1,13 @@
+[Plymouth Theme]
+Name=Red Hat Upgrade Tool
+Description=A pulsing progress bar intended for use during system upgrades.
+ModuleName=two-step
+
+[two-step]
+ImageDir=/usr/share/plymouth/themes/redhat-upgrade-tool
+HorizontalAlignment=.5
+VerticalAlignment=.5
+Transition=none
+TransitionDuration=0.0
+BackgroundStartColor=0x111111
+BackgroundEndColor=0x111111

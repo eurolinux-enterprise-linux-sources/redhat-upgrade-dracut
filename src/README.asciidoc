@@ -1,0 +1,62 @@
+redhat-upgrade-dracut - initramfs environment for RHEL Upgrades
+========================================================
+Will Woods <wwoods@redhat.com>
+
+This is 'redhat-upgrade-dracut', the initramfs environment for RHEL Upgrades.
+
+Components
+----------
+
+It has the following parts:
+
+`90system-upgrade/`
+~~~~~~~~~~~~~~~~~~~
+This module provides a (distro-neutral) framework for running upgrades.
+
+* Adds three dracut hooks: `upgrade-pre`, `upgrade`, and `upgrade-post`.
+* Adds `upgrade.target`, which runs the above hooks (in order)
+* Automatically includes any other modules named `system-upgrade-*`
+* 'BONUS:' adds system-upgrade-shell.service
+
+`85system-upgrade-redhat/`
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+This is the RHEL 'system-upgrade' implementation.
+
+* Includes upgrade tool, SELinux policy, plymouth, etc.
+* Copies initramfs to `$NEWROOT/system-upgrade-root`
+* Runs 'system-upgrade-redhat' binary in the `upgrade` hook
+* Save log & journal to `/var/log/upgrade.{log,journal}` before reboot
+
+`system-upgrade-redhat.c`
+~~~~~~~~~~~~~~~~~~~~~~~~~
+The actual upgrade tool.
+
+* Upgrades system using packages from `$UPGRADELINK`
+* Sends progress updates to `plymouthd`
+* Sends status output to console + journal
+
+The actual upgrade setup is handled in the main 'redhat-upgrade-tool' package, which can be
+found here: https://github.com/dashea/redhat-upgrade-tool
+
+Building
+--------
+
+You'll want to build the initramfs on the _newer_ distro version.
+
+. Install build requirements
+    * 'rpm-devel' >= 4.10.0
+    * 'plymouth-devel' >= 0.8.6
+    * 'systemd' >= 195
+    * 'glib2-devel'
+. Install dracut modules
+    * `make install`, or
+        .. `make archive`
+        .. `rpmbuild -ta redhat-upgrade-dracut*.tar.xz`
+        .. +rpm -ivh '[freshly-built RPMs]'+
+. Build upgrade initramfs
+    * `OLDTHEME=$(plymouth-set-default-theme)`
+    * `plymouth-set-default-theme redhat-upgrade-tool`
+    * `dracut --add system-upgrade upgrade.img`
+    * `plymouth-set-default-theme $OLDTHEME`
+
+// vim: set syn=asciidoc tw=78:

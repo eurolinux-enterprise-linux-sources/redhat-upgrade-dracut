@@ -1,0 +1,29 @@
+i18n::
+  * Mark strings for translation in `system-upgrade-redhat.c`
+
+Docs::
+  * man pages like whoa
+  * document boot args (rd.upgrade.*)
+
+Improve progress reporting::
+  * change /etc/*-release so "Welcome to XXX" message says "Welcome to redhat-upgrade-tool"
+  * count %posttrans scripts, take %posttrans into account for upgrade progress
+  ** although actually posttrans is only like 1.3% of elapsed time...
+  * warn user about long-running %post scripts
+  ** in a perfect world the scripts should do that for us
+  * use RPMCALLBACK_*_PROGRESS for finer-grained progress
+  * invoke a callback during pre-transaction RPM header scanning
+  * Fancier plymouth theme
+
+Error detection / reporting / handling::
+  * Fail if some packages are missing
+  ** Allow override via commandline arg?
+  * Add a 'upgrade-failure' callback (for e.g. restoring a backup)
+
+Upstreaming::
+  * get 90system-upgrade upstream
+  * get save-initramfs.sh into upstream dracut
+
+Backup/restore::
+  * If possible, take LVM/btrfs snapshot before upgrade
+  * On failure, restore snapshot
