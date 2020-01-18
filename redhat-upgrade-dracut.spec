@@ -2,7 +2,7 @@
 %global plymouthver 0.8.6
 
 Name:       redhat-upgrade-dracut
-Version:    0.8.10
+Version:    0.8.6
 Release:    1%{?dist}
 Summary:    The Red Hat Enterprise Linux Upgrade tool initramfs environment
 
@@ -58,22 +58,6 @@ make install DESTDIR=$RPM_BUILD_ROOT \
 
 
 %changelog
-* Mon Mar 28 2016 David Shea <dshea@redhat.com> - 0.8.10-1
-- Use --clean-upgraded instead of --clean
-  Related: rhbz#1275622
-
-* Mon Oct  6 2014 David Shea <dshea@redhat.com> - 0.8.9-1
-- backup old product id certificates before installation of new ones (jdornak)
-  Resolves: rhbz#1148783
-
-* Wed Sep 24 2014 David Shea <dshea@redhat.com) - 0.8.8-1
-- Remove the installonly checks for kernel packages
-  Resolves: rhbz#1084154
-
-* Thu Sep  4 2014 David Shea <dshea@redhat.com> - 0.8.7-1
-- Run cleanup after the postupgrade scripts
-  Resolves: rhbz#1100391
-
 * Thu Mar 27 2014 David Shea <dshea@redhat.com> - 0.8.6-1
 - Change to the postupgrade script directory before running.
   Resolves: rhbz#1078248
